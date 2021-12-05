@@ -17,11 +17,10 @@ public class PercentDiscountPurchase extends Purchase {
 
     @Override
     public Byn getCost() {
-        return super.getCost().mul(100 - DISCOUNT / 100);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s;%.2f", (super.toString()), DISCOUNT);
+        Byn tempCost = super.getCost();
+        if (getNumber() >= NUMBER_PURCHASE_FORE_DISCOUNT) {
+            tempCost.mul(100 - DISCOUNT / 100.0);
+        }
+        return tempCost;
     }
 }
