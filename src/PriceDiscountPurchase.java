@@ -23,21 +23,11 @@ public class PriceDiscountPurchase extends Purchase {
 
     @Override
     public Byn getCost() {
-        return super.getCost().mul(100 - discount / 100);
+        return super.getCost().mul(100 - discount / 100, RoundMethod.FLOOR, 2);
     }
 
     @Override
     public String toString() {
-        return String.format("%s;%.2f",(super.toString()), discount);
+        return String.format("%s;%.2f", (super.toString()), discount);
     }
 }
-
-
-
-
-
-
-
-
-
-

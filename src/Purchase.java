@@ -2,33 +2,33 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Purchase {
-    private final String NAME;
+    private final String name;
     private Byn price;
     private int number;
 
     public Purchase() {
-        NAME = "";
+        name = "";
         price = new Byn();
     }
 
     public Purchase(String name, Byn price, int number) {
-        this.NAME = name;
+        this.name = name;
         this.price = price;
         this.number = number;
     }
 
     public Purchase(Scanner sc) {
-        NAME = sc.next();
+        name = sc.next();
         price = new Byn(sc.nextInt());
         number = sc.nextInt();
     }
 
     public Purchase(Purchase purchase) {
-        this(purchase.NAME, purchase.price, purchase.number);
+        this(purchase.name, purchase.price, purchase.number);
     }
 
-    public String getNAME() {
-        return NAME;
+    public String getName() {
+        return name;
     }
 
     public Byn getPrice() {
@@ -48,7 +48,7 @@ public class Purchase {
     }
 
     public Byn getCost() {
-        return new Byn(price).mul(number);
+        return new Byn(price).mul(number, RoundMethod.FLOOR, 2);
     }
 
     public String toString() {
@@ -60,13 +60,12 @@ public class Purchase {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Purchase)) {
             return false;
         }
         Purchase purchase = (Purchase) o;
         return number == purchase.number &&
-                Objects.equals(NAME, purchase.NAME) &&
+                Objects.equals(name, purchase.name) &&
                 Objects.equals(price, purchase.price);
     }
 }
-
